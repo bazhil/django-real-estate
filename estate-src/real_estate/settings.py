@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-51(n870m@x92fhkvpped_$mh)j+715p+)x7tqotii3q6qis+(7
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
 
 
 # Application definition
@@ -209,12 +209,12 @@ LOGGING = {
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
-        'rest_framework_simplejwt.authentication.JWTAuthentication'
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
     )
 }
 
 # TODO: указать значение!
-SIGNING_KEY = ''
+SIGNING_KEY = 'bd6qy8tlv_youtc2^ANGUp4rLQ@m35oxz*6%v!*=-%_8fkaA'
 
 SIMPLE_JWT = {
     'AUTH_HEADER_TYPES': (
@@ -250,12 +250,12 @@ DJOSER = {
 
 # TODO: заполнить пользователя (email) и пароль!!!
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST_USER = ''
+EMAIL_HOST_USER = 'yardecorbeton@yandex.ru'
 EMAIL_HOST = 'smtp.yandex.ru'
 EMAIL_PORT = '465'
 EMAIL_USE_TLS = False
 EMAIL_USE_SSL = True
-EMAIL_HOST_PASSWORD = ''
+EMAIL_HOST_PASSWORD = 'xlwoznqsykzshyxf'
 
 SITE_NAME = 'Real Estate'
-DOMAIN = 'localhost'
+# DOMAIN = 'localhost'
