@@ -222,7 +222,7 @@ SIMPLE_JWT = {
         'JWT'
     ),
     'ACCESS_TOKEN_LIFETIME': timedelta(minutes=120),
-    'REFRESH_TOKEN_LIFETIME': timedelta(day=1),
+    'REFRESH_TOKEN_LIFETIME': timedelta(hours=24),
     'SIGNING_KEY': SIGNING_KEY,
     'AUTH_HEADER_NAME': 'HTTP_AUTHORIZATION',
     'AUTH_TOKEN_CLASSES': ('rest_framework_simplejwt.tokens.AccessToken',)
@@ -247,3 +247,15 @@ DJOSER = {
         'user_delete': 'djoser.serializers.UserDeleteSerializer'
     }
 }
+
+# TODO: заполнить пользователя (email) и пароль!!!
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST_USER = ''
+EMAIL_HOST = 'smtp.yandex.ru'
+EMAIL_PORT = '465'
+EMAIL_USE_TLS = False
+EMAIL_USE_SSL = True
+EMAIL_HOST_PASSWORD = ''
+
+SITE_NAME = 'Real Estate'
+DOMAIN = 'localhost'
