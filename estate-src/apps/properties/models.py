@@ -46,6 +46,15 @@ class Property(TimeStampedUUIDModel):
                                           validators=[MinValueValidator(1)],
                                           default=11)
     price = models.DecimalField(verbose_name=_('Price'), max_digits=8, decimal_places=2, default=0.0)
-    tax = models.DecimalField(verbose_name=_('Property tax'), max_digits=6, decimal_places=2, default=0.13)
+    tax = models.DecimalField(verbose_name=_('Property tax'), max_digits=6, decimal_places=2, default=0.13,
+                              help_text='13% tax')
+    plot_area = models.DecimalField(verbose_name=_('Plot area (m^2)'), max_digits=8, decimal_places=2, default=0.0)
+    total_floors = models.IntegerField(verbose_name=_('Number of Floors'), default=0)
+    bedrooms = models.IntegerField(verbose_name=_('Bedrooms'), default=1)
+    bathrooms = models.DecimalField(verbose_name=_('Bathrooms'), max_digits=4, decimal_places=2, default=1.0)
+    advert_type = models.CharField(verbose_name=_('Advert type'), max_length=50, choices=AdvertType.choices,
+                                   default=AdvertType.FOR_SALE)
+
+
 
 
