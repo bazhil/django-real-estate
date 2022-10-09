@@ -6,7 +6,7 @@ from django.contrib.auth import get_user_model
 from django.core.validators import MinValueValidator
 from django.db import models
 from django.utils.translation import gettext_lazy as _
-from django_countries import CountryField
+from django_countries.fields import CountryField
 from apps.common.models import TimeStampedUUIDModel
 
 User = get_user_model()
@@ -32,7 +32,7 @@ class Property(TimeStampedUUIDModel):
         OTHER = 'Other', _('Other')
 
     user = models.ForeignKey(User, verbose_name=_('Agent, seller or buyer'),
-                             related_name='agent_buyer', on_delete=models.DO_NOTHING())
+                             related_name='agent_buyer', on_delete=models.DO_NOTHING)
     title = models.CharField(verbose_name=_('Property title'), max_length=250)
     slug = AutoSlugField(populate_from='title', unique=True, always_update=True)
     ref_code = models.CharField(verbose_name=_('Property reference code'), max_length=255,
@@ -54,7 +54,27 @@ class Property(TimeStampedUUIDModel):
     bathrooms = models.DecimalField(verbose_name=_('Bathrooms'), max_digits=4, decimal_places=2, default=1.0)
     advert_type = models.CharField(verbose_name=_('Advert type'), max_length=50, choices=AdvertType.choices,
                                    default=AdvertType.FOR_SALE)
+    property_type = models.CharField(verbose_name=_('Property Type'), max_length=50, choices=PropertyType.choices,
+                                     default=PropertyType.OTHER)
+    cover_photo = models.ImageField(verbose_name=_('Main photo'), default=None, null=True, blank=True)
+    photo_1 = models.ImageField(default=None, null=True, blank=True)
+    photo_2 = models.ImageField(default=None, null=True, blank=True)
+    photo_3 = models.ImageField(default=None, null=True, blank=True)
+    photo_4 = models.ImageField(default=None, null=True, blank=True)
+    published_status = models.BooleanField(verbose_name=_('Published status'))
+    views = models.IntegerField(verbose_name=_('Total views'), default=0)
+    objects=models.Manager()
+    published = PropertyPublishedManager()
 
+    def __str__(self):
+        return self.title
 
+    class Meta:
+        verbose_name = 'Property'
+        verbose_name_plural = 'Properties'
 
-
+    def save(self, *args, **kwargs):
+        self.title = str.title(self.title)
+        self.description = str.description(self.description)
+        self.ref_code = "".join(random.choices(string.ascii_uppercase + string.digits, k=10))
+        super(Property, self).save(*args, **kwargs)
