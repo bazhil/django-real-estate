@@ -78,3 +78,25 @@ class Property(TimeStampedUUIDModel):
         self.description = str.description(self.description)
         self.ref_code = "".join(random.choices(string.ascii_uppercase + string.digits, k=10))
         super(Property, self).save(*args, **kwargs)
+
+    @property
+    def final_property_price(self):
+        tax_percentage = self.tax
+        property_price = self.price
+        tax_amount = round(tax_percentage * property_price, 2)
+        price_after_tax = float(round(property_price + tax_amount, 2))
+
+        return price_after_tax
+
+
+class PropertyViews(TimeStampedUUIDModel):
+    ip = models.CharField(verbose_name=_('IP Address'), max_length=250)
+    property = models.ForeignKey(Property, related_name='property_views', on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f'Total views on - {self.property.title} is - {self.property.views} view(s)'
+
+
+    class Meta:
+        verbose_name = 'Total Views on Property'
+        verbose_name_plural = 'Total Property Views'
