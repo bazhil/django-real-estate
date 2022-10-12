@@ -61,7 +61,7 @@ class Property(TimeStampedUUIDModel):
     photo_2 = models.ImageField(default=None, null=True, blank=True)
     photo_3 = models.ImageField(default=None, null=True, blank=True)
     photo_4 = models.ImageField(default=None, null=True, blank=True)
-    published_status = models.BooleanField(verbose_name=_('Published status'))
+    published_status = models.BooleanField(verbose_name=_('Published status'), default=False)
     views = models.IntegerField(verbose_name=_('Total views'), default=0)
     objects=models.Manager()
     published = PropertyPublishedManager()
