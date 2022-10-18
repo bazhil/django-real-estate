@@ -37,7 +37,7 @@ class ListAllPropertiesAPIView(generics.ListAPIView):
     ordering_fields = ['created_at']
 
 
-class ListAgentsPropertyAPIView(generics.ListAPIView):
+class ListAgentsPropertiesAPIView(generics.ListAPIView):
     serializer_class = PropertySerializer
     pagination_class = PropertyPagination
     filter_backends = [DjangoFilterBackend, filters.SearchFilter, filters.OrderingFilter]
