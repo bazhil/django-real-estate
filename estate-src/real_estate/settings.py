@@ -261,3 +261,5 @@ EMAIL_HOST_PASSWORD = ''
 
 SITE_NAME = 'Real Estate'
 # DOMAIN = 'localhost'
+
+DEFAULT_FROM_EMAIL = 'test@test.com'
