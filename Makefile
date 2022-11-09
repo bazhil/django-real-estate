@@ -6,16 +6,16 @@ ENV_FILE_PARAM = --env-file .env
 endif
 
 build:
-	docker compose up --build -d --remove-orphans
+	docker-compose up --build -d --remove-orphans
 
 up:
-	docker compose up -d
+	docker-compose up -d
 
 down:
-	docker compose down
+	docker-compose down
 
 show-logs:
-	docker compose logs
+	docker-compose logs
 
 migrate:
 	docker compose exec api python3 manage.py migrate
