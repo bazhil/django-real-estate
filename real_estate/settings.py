@@ -13,6 +13,10 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 from pathlib import Path
 from datetime import timedelta
 
+import environ
+
+env = environ.Env(DEBUG=(bool, False))
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -47,7 +51,8 @@ THIRD_PARTY_APPS = [
     'django_countries',
     'phonenumber_field',
     'djoser',
-    'rest_framework_simplejwt'
+    'rest_framework_simplejwt',
+    'djcelery_email'
 ]
 
 LOCAL_APPS = [
@@ -263,3 +268,7 @@ SITE_NAME = 'Real Estate'
 # DOMAIN = 'localhost'
 
 DEFAULT_FROM_EMAIL = 'yardecorbeton@yandex.ru'
+
+CELERY_BROKER_URL = env('CELERY_BROKER')
+CELERY_RESULT_BACKEND = env('CELERY_BACKEND')
+CELERY_TIMEZONE = 'Europe/Moscow'
